@@ -1,0 +1,80 @@
+.progress-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .progress-layout-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.log-form-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.log-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-sm);
+}
+
+.history-table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.progress-history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+  text-align: left;
+}
+
+.progress-history-table th {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-weight: 700;
+  padding: 12px;
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.progress-history-table td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+
+.progress-history-table tr:last-child td {
+  border-bottom: none;
+}
+
+.progress-history-table tr:hover {
+  background: var(--bg-secondary);
+}
+
+.charts-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.chart-card-header {
+  margin-bottom: var(--space-md);
+}
+
+.chart-wrapper {
+  height: 280px;
+  width: 100%;
+  margin-top: var(--space-sm);
+}

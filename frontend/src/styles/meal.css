@@ -1,0 +1,104 @@
+.meal-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.meal-timeline-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.meal-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: var(--space-sm);
+}
+
+.meal-title {
+  font-size: var(--text-lg);
+  font-weight: 800;
+  color: var(--primary-accent);
+}
+
+.macro-badge-row {
+  display: flex;
+  gap: var(--space-xs);
+  flex-wrap: wrap;
+}
+
+.meal-split-detail {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: var(--space-lg);
+}
+
+@media (max-width: 768px) {
+  .meal-split-detail {
+    grid-template-columns: 1fr;
+  }
+}
+
+.prep-instructions {
+  background: var(--bg-secondary);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--primary-accent);
+  line-height: 1.6;
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.shopping-checklist {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.shopping-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  cursor: pointer;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--surface);
+  transition: all var(--transition-fast);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  user-select: none;
+}
+
+.shopping-item.bought {
+  border-color: var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-tertiary);
+  text-decoration: line-through;
+}
+
+.shopping-checkbox {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  border: 2px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 8px;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.shopping-item.bought .shopping-checkbox {
+  background: var(--success);
+  border-color: var(--success);
+}

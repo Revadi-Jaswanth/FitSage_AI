@@ -1,0 +1,41 @@
+# ==========================================
+# FitSage AI - Git Ignore System Rules
+# ==========================================
+
+# 1. Python virtual environments and caches
+backend/venv/
+backend/.venv/
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+backend/.pytest_cache/
+
+# 2. NodeJS dependencies and production builds
+frontend/node_modules/
+frontend/dist/
+frontend/.svelte-kit/
+frontend/.next/
+frontend/out/
+
+# 3. Local environment files containing sensitive credentials
+**/.env
+**/.env.local
+**/*.local
+**/*.secret
+
+# 4. OS metadata and editors configurations
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+
+# 5. Local telemetry logs
+backend/logs/ai_metrics.log
+backend/logs/*.log
+*.log
