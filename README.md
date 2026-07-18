@@ -136,5 +136,5 @@ npm run dev
 ## 📄 License
 This project is licensed under the MIT License - see [LICENSE](LICENSE) for details.
 
-## 👤 Authors
-Designed, built, and polished by the FitSage AI Core Engineering team.
+## 👤 Author
+Designed, built, and polished by Revadi Naga Sai Jaswanth
