@@ -30,6 +30,96 @@ def run_migrations():
     try:
         cursor = conn.cursor()
         
+        # Initialize base tables if empty
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS users (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                name VARCHAR(100) NOT NULL,
+                email VARCHAR(120) UNIQUE NOT NULL,
+                password VARCHAR(200) NOT NULL,
+                age INT DEFAULT NULL,
+                gender VARCHAR(20) DEFAULT NULL,
+                height INT DEFAULT NULL,
+                weight INT DEFAULT NULL,
+                goal VARCHAR(100) DEFAULT NULL,
+                diet VARCHAR(100) DEFAULT NULL,
+                budget INT DEFAULT NULL,
+                activity VARCHAR(100) DEFAULT NULL,
+                equipment VARCHAR(100) DEFAULT NULL,
+                role VARCHAR(50) NOT NULL DEFAULT 'user',
+                fitness_level VARCHAR(50) DEFAULT 'Beginner',
+                allergies TEXT DEFAULT NULL,
+                injuries TEXT DEFAULT NULL,
+                workout_duration INT DEFAULT 45,
+                profile_completed BOOLEAN DEFAULT FALSE,
+                initial_setup_completed BOOLEAN DEFAULT FALSE,
+                workout_status VARCHAR(20) DEFAULT 'pending',
+                meal_status VARCHAR(20) DEFAULT 'pending',
+                recommendations_status VARCHAR(20) DEFAULT 'pending',
+                insights_status VARCHAR(20) DEFAULT 'pending',
+                workout_location VARCHAR(50) DEFAULT NULL,
+                medical_conditions TEXT DEFAULT NULL,
+                water_goal VARCHAR(50) DEFAULT NULL,
+                sleep_hours VARCHAR(50) DEFAULT NULL,
+                last_login_date DATE DEFAULT NULL,
+                current_streak INT DEFAULT 0,
+                longest_streak INT DEFAULT 0,
+                bmr FLOAT DEFAULT NULL,
+                calories_target INT DEFAULT 2000,
+                ai_insights TEXT DEFAULT NULL
+            )
+        """)
+        
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS workouts (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                user_id INT NOT NULL,
+                workout_plan TEXT NOT NULL,
+                profile_hash VARCHAR(64) DEFAULT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+            )
+        """)
+        
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS meals (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                user_id INT NOT NULL,
+                meal_plan TEXT NOT NULL,
+                profile_hash VARCHAR(64) DEFAULT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+            )
+        """)
+        
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS progress_logs (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                user_id INT NOT NULL,
+                weight FLOAT NOT NULL,
+                water_intake INT DEFAULT 0,
+                calories_consumed INT DEFAULT 0,
+                workout_completed BOOLEAN DEFAULT FALSE,
+                date DATE NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+                UNIQUE KEY user_date_idx (user_id, date)
+            )
+        """)
+        
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS coach_chat (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                user_id INT NOT NULL,
+                user_message TEXT NOT NULL,
+                ai_response LONGTEXT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                session_id VARCHAR(50) DEFAULT 'default',
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+            )
+        """)
+        conn.commit()
+        
         # Check and create role column
         cursor.execute("SHOW COLUMNS FROM users LIKE 'role'")
         if not cursor.fetchone():
